@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:med_sheet/Pages/homescreen.dart';
+import 'package:med_sheet/Pages/navigation.dart';
 
 import '../API/google_signin_api.dart';
 import '../Pages/mainpage.dart';
@@ -18,7 +20,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height * 0.25;
     return Scaffold(
-     backgroundColor: Colors.white,
+     backgroundColor: Color.fromARGB(255, 220, 213, 238),
      body: SafeArea(
        child: Column(
         children: [
@@ -30,7 +32,7 @@ class _LoginScreenState extends State<LoginScreen> {
           
           // const SizedBox(height: 8,),
           // const Text("MedSheet",style: TextStyle(fontSize: 30),),
-          const SizedBox(height: 10,),
+          const SizedBox(height: 16,),
           const Text("Digital Sheet of your medical reports!!",style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600,  ),),
           SizedBox(height: height*1.4,),
           InkWell(
@@ -40,7 +42,7 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Center(
                 child: Container(
                           
-                  height: 75,
+                  height: 70,
                   width: 300,
                   decoration: BoxDecoration(color: Colors.black,
                   borderRadius: BorderRadius.circular(40)
@@ -63,7 +65,6 @@ class _LoginScreenState extends State<LoginScreen> {
         ],
        ),
      ),
-
     );
     
   }
@@ -76,8 +77,8 @@ class _LoginScreenState extends State<LoginScreen> {
       
     }else{
       print(user);
-
-    Navigator.pushReplacement( context, MaterialPageRoute(builder: (context)=> MainPage(user: user)));
+      print(user.photoUrl);
+    Navigator.pushReplacement( context, MaterialPageRoute(builder: (context)=> Navigation(user: user)));
 
    }
   }
