@@ -76,8 +76,8 @@ class _LoginScreenState extends State<LoginScreen> {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Unable to SignIn")));
       
     }else{
-      print(user);
-      print(user.photoUrl);
+      // print(user);
+      // print(user.photoUrl);
     Navigator.pushReplacement( context, MaterialPageRoute(builder: (context)=> Navigation(user: user)));
 
    }

@@ -51,7 +51,7 @@ class _NavigationState extends State<Navigation> {
 
         Icon(Icons.home),
 
-        Icon(Icons.favorite),
+        Icon(Icons.settings),
 
       ]),
 
