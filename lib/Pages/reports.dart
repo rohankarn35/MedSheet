@@ -22,12 +22,12 @@ class _reportsState extends State<reports> {
         padding: const EdgeInsets.all(8.0),
         child: GestureDetector(
           onTap: (){
-            GoogleSignInApi.logout();
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> LoginScreen()));
+            // GoogleSignInApi.logout();
+            // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> LoginScreen()));
           },
           child: Icon(Icons.logout)),
       )
-     ],   backgroundColor: Colors.deepOrangeAccent,
+     ],   backgroundColor: Colors.deepPurpleAccent,
      centerTitle: true,
         
       ),

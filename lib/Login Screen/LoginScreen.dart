@@ -1,12 +1,13 @@
 
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:med_sheet/Pages/homescreen.dart';
 import 'package:med_sheet/Pages/navigation.dart';
+import 'package:med_sheet/Pages/stream.dart';
 
 import '../API/google_signin_api.dart';
-import '../Pages/mainpage.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -38,7 +39,14 @@ class _LoginScreenState extends State<LoginScreen> {
           InkWell(
             
             child: InkWell(
-              onTap: signin,
+              onTap: () async{
+                   
+              GoogleSignInApi.login();
+             
+              
+              
+              print("CLicked");
+              },
               child: Center(
                 child: Container(
                           
@@ -69,17 +77,5 @@ class _LoginScreenState extends State<LoginScreen> {
     
   }
 
-    Future signin()  async{
-    final user = await GoogleSignInApi.login();
-
-    if (user == null) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Unable to SignIn")));
-      
-    }else{
-      // print(user);
-      // print(user.photoUrl);
-    Navigator.pushReplacement( context, MaterialPageRoute(builder: (context)=> Navigation(user: user)));
-
-   }
-  }
+  
 }

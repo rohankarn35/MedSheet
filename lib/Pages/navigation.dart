@@ -1,12 +1,13 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:med_sheet/Pages/filepicker.dart';
 import 'package:med_sheet/Pages/homescreen.dart';
 import 'package:med_sheet/Pages/reports.dart';
+import 'package:med_sheet/Pages/upload.dart';
 
 class Navigation extends StatefulWidget {
-  final GoogleSignInAccount user;
+  final User? user;
   Navigation({Key? key, required this.user}) : super(key: key);
 
   @override
@@ -15,7 +16,7 @@ class Navigation extends StatefulWidget {
 
 class _NavigationState extends State<Navigation> {
   // final GoogleSignInAccount useraccount = user;
-  late GoogleSignInAccount user;
+  late User? user = widget.user; 
 
   int _selectedindex =  1;
    late List<Widget> screens;
@@ -23,9 +24,9 @@ class _NavigationState extends State<Navigation> {
   void initState() {
     // TODO: implement initState
     super.initState();
-      user = widget.user;
+      user = user;
     screens = [
-      filepicker(),
+      Upload(user: user),
       HomeScreen(user: user),
       reports()
     ];
@@ -41,7 +42,7 @@ class _NavigationState extends State<Navigation> {
           });
         },
         index: _selectedindex,
-        color: Colors.red,
+        color: Colors.deepPurpleAccent,
         backgroundColor: Colors.white,
         buttonBackgroundColor: Colors.white,
         animationDuration: Duration(milliseconds: 350),
