@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'MedSheet',
-      home: AppLock()
+      home: StreamWidget()
     );
   }
 }

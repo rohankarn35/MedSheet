@@ -3,6 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:local_auth/local_auth.dart';
+import 'package:med_sheet/Pages/applock.dart';
 import 'package:med_sheet/Pages/feedback.dart';
 import 'package:med_sheet/Pages/upload.dart';
 import 'package:med_sheet/Widgets/settingtiles.dart';
@@ -28,6 +30,7 @@ class UserInfos extends StatefulWidget {
 
 class _UserInfosState extends State<UserInfos> {
   final FirebaseFirestore _firebasefirestore = FirebaseFirestore.instance;
+ bool _isBiometricSupported = false; 
 
   List<String> existingfile = [];
 
@@ -40,11 +43,24 @@ class _UserInfosState extends State<UserInfos> {
     });
     print("Existing Files ${existingfile.length}");
   }
-
+ Future<bool?> isSupported() async{
+   var auth = LocalAuthentication();
+   if(await auth.isDeviceSupported()){
+    return true;
+   }
+   else{
+    return false;
+   }
+ }
   @override
   void initState() {
     super.initState();
     getExistingfile();
+   isSupported().then((supported) {
+      setState(() {
+        _isBiometricSupported = supported ?? false;
+      });
+    });
   }
 
   @override
@@ -150,18 +166,31 @@ class _UserInfosState extends State<UserInfos> {
               tiles(
                 icon: Icons.info_outline_rounded,
                 text: "About",
-                onTap: () {},
+                onTap: () {
+                  
+                },
               ),
               SizedBox(
                 height: 20,
               ),
-              tiles(
-                icon: Icons.lock_open_rounded,
-                text: "App Lock",
-                onTap: () {},
-              ),
-              SizedBox(
-                height: 20,
+              
+              Visibility(
+            visible: _isBiometricSupported,
+            child: tiles(
+              icon: Icons.lock_open_rounded,
+              text: "App Lock",
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) =>
+                  MainPage()
+                ));
+              },
+            ),
+          ),
+              Visibility(
+                 visible: _isBiometricSupported,
+                child: SizedBox(
+                  height: 20,
+                ),
               ),
               tiles(
                 icon: Icons.feedback_rounded,

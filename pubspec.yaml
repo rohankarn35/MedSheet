@@ -53,6 +53,9 @@ dependencies:
   open_file: ^3.3.2
   downloads_path_provider_28: ^0.1.2
   flutter_local_notifications: ^15.1.1
+  flutter_local_authentication: ^0.0.3
+  shared_preferences: ^2.2.1
+  local_auth: ^2.1.7
 
 dev_dependencies:
   flutter_test:
