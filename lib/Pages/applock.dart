@@ -12,7 +12,12 @@ class _AppLockState extends State<AppLock> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
+      appBar: AppBar(
+ title: Text("App Lock"),
+ centerTitle: true,
+ backgroundColor: Colors.deepPurpleAccent,
+
+      ),
     );
   }
 }
